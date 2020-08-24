@@ -1,0 +1,23 @@
+Scoping determines how a value is associated with a free variable in a function. Now, whats a free variable? 
+Whenever a function is defined, it has some set of variables as its formal arguments i.e. defined in the function header. Quoting this example,
+
+f <- function(x, y){
+  x^2 + y/z 
+  }
+  
+  
+x and y are variables in the formal arguments, but what is this z doing here? This z is what is referred to as a free variable. Now, the question comes, is that, given the value of x and y, what value should we assign to z? This brings to following some scoping rules in R, termed as lexical scoping, an alternative of dynamic scoping. 
+
+Lexical scoping can be understood by the following key rules:
+
+1. The values of a free variable is looked for in the environment in which the function is defined.
+2. Every environment has a parent environment and its possible to have one parent and multiple children environment.
+3. There is only one environment without a parent called an empty environment.
+4. If you take a function and associate with an environment, then this is called as a closure or function closure.
+
+
+Searching for the free variable (lets say z in our case):
+
+1. It will look for the environment in which the function was defined i.e. for example,in the present workspace or the global environment.
+2. If it doesn't find the value there, the search goes to the next level i.e. to the parent environment of the global environment.
+3. Its possible to define a function outside the global environment, and then the value of the variable will be searched until the top level environment is hit. In this case it will be the global environment. But if a value is defined in the namespace of some package, consider lm from the previous github file example, then the top level environment is the namespace of the particular package. At the last, the base package is searched and then we hit the empty environment. And if the symbol is not yet founf then an error pops up saying we can't find a value for this symbol.
