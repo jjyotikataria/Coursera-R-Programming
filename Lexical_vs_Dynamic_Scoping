@@ -1,0 +1,64 @@
+Lets understand it again by quoting an example from the week2 video : Scoping Rules - R Scoping Rules
+
+Considering these two functions f and g,
+ 
+y <- 10
+
+f <- function(x){
+    y <- 2
+    y^2 + g(x)
+}
+
+g <- function(x){
+    x*y
+}
+
+In the f function, y is a free variable , g also as it is not defined in the function and is not an argument also. 
+In the g function, y is a free variable.
+
+f(3) will be what then?
+
+f(3) = y^2 + g(3) , wherein, g(x) = x*y (here it is g(3) = 3*y)
+
+What value of y to take now, is the question? y <- 10 defined in the global environment or y <- 2 defined in  the function f ???????
+Thats where the difference lies in lexical and dynamic scoping.
+
+Lexical scoping : The value of a free variable is looked up in the environment from which a function is defined i.e. global environment (y <- 10 will be considered)
+Dynamic scoping : the value of a free variable is looked up in the environment from which a function is called i.e. calling environment or the parent frame (y <- 2 will be considered)
+
+
+### Interestingly, it may be possible wherein a calling environment and the defining environment are the same itself. Lets consider a case wherein a function is defined in the global environment and is being called from the same.
+
+g <- function(x) {
+   a <- 3
+   x+a+y
+ }
+ 
+ y is a variable here (as it is not defined in the function and not in the argument as well). We cannot figure out y defined anywhere. a is a local variable.
+ Lets find out g(2) ?
+ 
+ x is 2, a is 3 but where is y?
+ 
+ Now later on lets define y <- 3 and then do
+ 
+ g(2), we get this as result
+ 
+ 2+3+3 = 8
+ 
+ So, the value of y was being looked up in the calling environment which is the global environment in this case.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
