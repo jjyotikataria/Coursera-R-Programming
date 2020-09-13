@@ -1,4 +1,4 @@
-Lets understand it again by quoting an example from the week2 video : Scoping Rules - R Scoping Rules
+Lets understand the concept of lexical scoping and introduce dynamic scoping. Quoting an example from the week2 video : Scoping Rules - R Scoping Rules
 
 Considering these two functions f and g,
  
@@ -13,14 +13,14 @@ g <- function(x){
     x*y
 }
 
-In the f function, y is a free variable , g also as it is not defined in the function and is not an argument also. 
+In the f function, y is a free variable , g also as both are not defined in the function and are not an argument also. 
 In the g function, y is a free variable.
 
-f(3) will be what then?
+f(3) will be evaluated as what, is the question here?
 
 f(3) = y^2 + g(3) , wherein, g(x) = x*y (here it is g(3) = 3*y)
 
-What value of y to take now, is the question? y <- 10 defined in the global environment or y <- 2 defined in  the function f ???????
+What value of y to take now? y <- 10 defined in the global environment or y <- 2 defined in  the function f ???????
 Thats where the difference lies in lexical and dynamic scoping.
 
 Lexical scoping : The value of a free variable is looked up in the environment from which a function is defined i.e. global environment (y <- 10 will be considered)
@@ -34,18 +34,19 @@ g <- function(x) {
    x+a+y
  }
  
- y is a variable here (as it is not defined in the function and not in the argument as well). We cannot figure out y defined anywhere. a is a local variable.
+ y is a free variable here (as it is not defined in the function and not in the argument as well). a is a local variable.
  Lets find out g(2) ?
  
- x is 2, a is 3 but where is y?
+ x is 2, a is 3 but y still needs a value?
  
- Now later on lets define y <- 3 and then do
+ Lets define y <- 4 and then perform g(2)? What do we get?
+ We get 9 as the result. How?
  
- g(2), we get this as result
+ g(2) = x + a + y 
+      = 2 + 3 + 4 
+      = 9
  
- 2+3+3 = 8
- 
- So, the value of y was being looked up in the calling environment which is the global environment in this case.
+ So, the value of y was looked up in the calling environment which is nothing but the global environment in this case.
 
 
 
