@@ -15,6 +15,5 @@ As shown, it will return the value from the gobal environment i.e. the function 
 Another terminology to be known is a namespace? Any idea what happens when we load a library in R? 
 The namespace of the package i.e. environment (saying it again, collection of symbol value pairs get loaded up) loads up and sets up its position in the hierarchy just after the global environment.
 
-
 So, we end up with setting this as a search order:
 Global envt < recently laoded package namespace < older loaded packages < base packages
