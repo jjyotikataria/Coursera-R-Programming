@@ -12,8 +12,13 @@ function(x){x*x}
 
 As shown, it will return the value from the gobal environment i.e. the function we defined. There is a hierarchichal order which R follows to search the value of a symbol and its roughly as a follows (first to encounter on the search list): Global environment > recently installed packages > base packages at the last.  
 
-Another terminology to be known is a namespace? Any idea what happens when we load a library in R? 
-The namespace of the package i.e. environment (saying it again, collection of symbol value pairs get loaded up) loads up and sets up its position in the hierarchy just after the global environment.
+Another terminology to be known is a "namespace". What do you think happens when we load a library in R? 
+The namespace of the package is the environment (saying it again, collection of symbol value pairs get loaded up) loads up and sets up its position in the hierarchy just after the global environment.
 
-So, we end up with setting this as a search order:
-Global envt < recently laoded package namespace < older loaded packages < base packages
+So, the namespace of the recently installed package grab a pew in the following order:-
+
+-------------------------------------------------------------------------------------------
+Global envt -> recently loaded package namespace -> older loaded packages -> base packages
+-------------------------------------------------------------------------------------------
+
+
