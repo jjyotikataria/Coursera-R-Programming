@@ -1,13 +1,98 @@
-Unzip the file "ProgAssignment3-data.zip" and set this as working directory to begin with this assignment.
+Assignment Tasks:
+_______________________________________________________________________________________________________________________________________________________________________________
 
---------------
-Dataset
---------------
-This dataset is used for a variety of purposes, including determining whether hospitals should be fined for not providing high quality care to patients
+1. Plot the 30-day mortality rates for heart attack
+_______________________________________________________________________________________________________________________________________________________________________________
 
-Lets understand the ingredients of the zip file :-
 
-• outcome-of-care-measures.csv: Contains information about 30-day mortality and readmission rates for heart attacks, heart failure, and pneumonia for over 4,000 hospitals.
-• hospital-data.csv: Contains information about each hospital.
-• Hospital_Revised_Flatfiles.pdf: Descriptions of the variables in each file (i.e the code book).
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character")  
+outcome[, 11] <- as.numeric(outcome[, 11])
+hist(outcome[, 11], xlab="Deaths", main="Mortality rate for heart attack", col="lightblue")
+
+Explanation:
+
+colClasses ????
+Two benefits from this:
+
+First: If you can see the difference, loading a huge data with this argument significantly reduces time, because read.csv need not to make an educated guess about the class of the feature(column header)
+
+> system.time(outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character"))
+   user  system elapsed 
+   0.06    0.00    0.07 
+ 
+> system.time(outcome <- read.csv("outcome-of-care-measures.csv"))
+   user  system elapsed 
+   0.17    0.00    0.25 
+
+Second: If you have trailing zeroes in the starting of the numbers, they will be interpreted as numeric class but this may not be what you wanted.
+
+>read.csv("info.csv", colClasses = "character")
+
+rank    pin_code
+first   100034
+second  04647
+
+>read.csv("info.csv")
+
+rank    pin_code
+first   100034
+second  04647
+
+-----------------
+as.numeric ??
+-----------------
+
+Because we originally read the data in as character (by specifying colClasses = "character" we need to coerce the column to be numeric in order to plot histogram which depends on the numerical data here.
+
+_______________________________________________________________________________________________________________________________________________________________________________
+
+2 Finding the best hospital in a state
+_______________________________________________________________________________________________________________________________________________________________________________
+
+Write a function called best that take two arguments: the 2-character abbreviated name of a state and an
+outcome name. The function reads the outcome-of-care-measures.csv file and returns a character vector
+with the name of the hospital that has the best (i.e. lowest) 30-day mortality for the specified outcome
+in that state. The hospital name is the name provided in the Hospital.Name variable. The outcomes can
+be one of “heart attack”, “heart failure”, or “pneumonia”. Hospitals that do not have data on a particular
+outcome should be excluded from the set of hospitals when deciding the rankings.
+
+best <- function(state, outcome){
+  outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character", header=TRUE)
+  
+  
+  
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
