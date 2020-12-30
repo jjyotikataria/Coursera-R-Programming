@@ -14,7 +14,8 @@ Explanation:
 colClasses ????
 Two benefits from this:
 
-First: If you can see the difference below, loading a huge data with this argument significantly reduces time, because read.csv need not to make an educated guess about the class of the feature(column header)
+First: If you can see the difference below, loading a huge data with this argument significantly reduces time, because read.csv need not to make an educated guess about the 
+class of the feature(column header)
 
 > system.time(outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character"))
    user  system elapsed 
@@ -42,14 +43,16 @@ second  04647
 as.numeric ??
 -----------------
 
-Because we originally read the data in as character (by specifying colClasses = "character" we need to coerce the column to be numeric in order to plot histogram which depends on the numerical data here.
+Because we originally read the data in as character (by specifying colClasses = "character" we need to coerce the column to be numeric in order to plot histogram which 
+depends on the numerical data here.
 
 _______________________________________________________________________________________________________________________________________________________________________________
 
 2 Finding the best hospital in a state
 _______________________________________________________________________________________________________________________________________________________________________________
 
-Understanding the problem- It takes time to understand the problem first. Here, we need to give two arguments for the function best i.e. state two letter code and which outcome we are considering from the three viz, "heart attack”, “heart failure”, or “pneumonia”. The function should return the hospital name with the least mortality rate. It makes sense as it is one of the quality determining factor for a hospital. In case, two different hospitals from the same state share the least same mortality rate, then the hospitals should be sorted alphabetically and the first should be reported.
+Understanding the problem- It takes time to understand the problem first. Here, we need to give two arguments for the function best i.e. state two letter code and which 
+outcome we are considering from the three viz, "heart attack”, “heart failure”, or “pneumonia”. The function should return the hospital name with the least mortality rate. It makes sense as it is one of the quality determining factor for a hospital. In case, two different hospitals from the same state share the least same mortality rate, then the hospitals should be sorted alphabetically and the first should be reported.
 
 
 
