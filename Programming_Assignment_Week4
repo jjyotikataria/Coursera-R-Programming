@@ -14,7 +14,7 @@ Explanation:
 colClasses ????
 Two benefits from this:
 
-First: If you can see the difference, loading a huge data with this argument significantly reduces time, because read.csv need not to make an educated guess about the class of the feature(column header)
+First: If you can see the difference below, loading a huge data with this argument significantly reduces time, because read.csv need not to make an educated guess about the class of the feature(column header)
 
 > system.time(outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character"))
    user  system elapsed 
@@ -49,12 +49,9 @@ ________________________________________________________________________________
 2 Finding the best hospital in a state
 _______________________________________________________________________________________________________________________________________________________________________________
 
-Write a function called best that take two arguments: the 2-character abbreviated name of a state and an
-outcome name. The function reads the outcome-of-care-measures.csv file and returns a character vector
-with the name of the hospital that has the best (i.e. lowest) 30-day mortality for the specified outcome
-in that state. The hospital name is the name provided in the Hospital.Name variable. The outcomes can
-be one of “heart attack”, “heart failure”, or “pneumonia”. Hospitals that do not have data on a particular
-outcome should be excluded from the set of hospitals when deciding the rankings.
+Understanding the problem- It takes time to understand the problem first. Here, we need to give two arguments for the function best i.e. state two letter code and which outcome we are considering from the three viz, "heart attack”, “heart failure”, or “pneumonia”. The function should return the hospital name with the least mortality rate. It makes sense as it is one of the quality determining factor for a hospital. In case, two different hospitals from the same state share the least same mortality rate, then the hospitals should be sorted alphabetically and the first should be reported.
+
+
 
 best <- function(state, outcome){
   outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character", header=TRUE)
@@ -63,7 +60,6 @@ best <- function(state, outcome){
   
 
 }
-
 
 
 
