@@ -58,19 +58,34 @@ the hospitals should be sorted alphabetically and the first should be reported.
 
 
 Solution:
-
 best <- function(state, outcome){
-  outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character", header=TRUE)
+    
+    file <- read.csv("outcome-of-care-measures.csv", header = TRUE, colClasses = "character")
+    
+    data <- file[,c(2,7,11,17,23)]
+    colnames(data) <- c("hospital name","state","heart attack","heart failure","pneumonia")
+    
+    if(!state %in% data[,"state"]){
+        stop("Invalid state")
+    }
+    
+    if(!outcome %in% c("heart attack","heart failure","pneumonia")){
+        stop("Invalid outcome")
+    }
+    
+    data <- data[(data[, "state"] == state), ]
+    data[, outcome] <- suppressWarnings(as.numeric(data[, outcome]))
+    data <- data[!is.na(data[, outcome]), ]
+    data <- data[order(data[, outcome]), ]
+    names <- data[data[, outcome] == min(data[, outcome]),1]
+    sort(names)[1]
+    
+}  
   
-  
-  
-
-}
-
 
 Explanation:
 
-The dataset is quite big, I tried dealing with the whole data in Rstudio but its messy when you do head,so I decided to just deal with the columns relevant for creating this 
+The dataset is quite big, I tried dealing with the whole data in Rstudio but its messy and not much understandable at a glance when we do head,so I decided to just deal with the columns relevant for creating this 
 best function.
 
 > header = TRUE is added because our data has headers (Provider Number,	Hospital Name,	Address 1 ..) and we want R to start counting the data entries from row2.
@@ -80,7 +95,10 @@ outcomes[1, ] will give
             Provider.Number         Hospital.Name                            Address.1
 1           10001                   SOUTHEAST ALABAMA MEDICAL CENTER         1108 ROSS CLARK CIRCLE
 
-> 
+and not just this             Provider.Number         Hospital.Name                            Address.1
+
+ >
+ 
 
 
 
