@@ -1,19 +1,25 @@
-An environment is a collection of symbol value pairs in a basic sense. For example, x <- 5 is a pair, wherein x is a symbol and 5 being its value. R actually binds a value to a symbol. Now, what is a global environment? A global environment is your workspace (where you land up first) and comprises of all the packages you have loaded and as told previously, its a collection of the symbol value pairs from the base packages + the recent packages you have loaded. Base packages are the preloaded basic packages for R, its like the alphabets for a language. 
+An environment is a collection of symbol value pairs in a basic sense. For example, x <- 5 is a pair, wherein x is a symbol and 5 being its value. R actually binds a value to 
+a symbol. Now, what is a global environment? A global environment is your workspace (where you land up first) and comprises of all the packages you have loaded and as told 
+previously, its a collection of the symbol value pairs from the base packages + the recent packages you have loaded. Base packages are the preloaded basic packages for R, 
+its like the alphabets for a language. 
 
 So, lets take an example, if an object is defined in your workspace (everything in R is considerd as an object is the most preliminary concept here) as :
 
 lm <- function(x) {x*x}    [This way, we have defined lm in the global environment]
 
-This is an example from the course video "Scoping Rules - Symbol Binding". Here, lm is a user defined function but actually, lm is a function in linear modelling from the stats package. So, what is expected to return when we type lm in the console? The function we defined, or lm model function from stats package???
+This is an example from the course video "Scoping Rules - Symbol Binding". Here, lm is a user defined function but actually, lm is a function in linear modelling from the stats 
+package. So, what is expected to return when we type lm in the console? The function we defined, or lm model function from stats package???
 
 > lm <- function(x){x*x}
 > lm
 function(x){x*x}
 
-As shown, it will return the value from the gobal environment i.e. the function we defined. There is a hierarchichal order which R follows to search the value of a symbol and its roughly as a follows (first to encounter on the search list): Global environment > recently installed packages > base packages at the last.  
+As shown, it will return the value from the gobal environment i.e. the function we defined. There is a hierarchichal order which R follows to search the value of a symbol and 
+its roughly as a follows (first to encounter on the search list): Global environment > recently installed packages > base packages at the last.  
 
 Another terminology to be known is a "namespace". What do you think happens when we load a library in R? 
-The namespace of the package is the environment (saying it again, collection of symbol value pairs get loaded up) loads up and sets up its position in the hierarchy just after the global environment.
+The namespace of the package is the environment (saying it again, collection of symbol value pairs get loaded up) loads up and sets up its position in the hierarchy just after 
+the global environment.
 
 So, the namespace of the recently installed package grab a pew in the following order:-
 
