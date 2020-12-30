@@ -17,8 +17,8 @@ The namespace of the package is the environment (saying it again, collection of 
 
 So, the namespace of the recently installed package grab a pew in the following order:-
 
--------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 Global envt -> recently loaded package namespace -> older loaded packages -> base packages
--------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 
 
