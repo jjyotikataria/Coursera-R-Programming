@@ -52,9 +52,12 @@ ________________________________________________________________________________
 _______________________________________________________________________________________________________________________________________________________________________________
 
 Understanding the problem- It takes time to understand the problem first. Here, we need to give two arguments for the function best i.e. state two letter code and which 
-outcome we are considering from the three viz, "heart attack”, “heart failure”, or “pneumonia”. The function should return the hospital name with the least mortality rate. It makes sense as it is one of the quality determining factor for a hospital. In case, two different hospitals from the same state share the least same mortality rate, then the hospitals should be sorted alphabetically and the first should be reported.
+outcome we are considering from the three viz, "heart attack”, “heart failure”, or “pneumonia”. The function should return the hospital name with the least mortality rate. 
+It makes sense as it is one of the quality determining factor for a hospital. In case, two different hospitals from the same state share the least same mortality rate, then 
+the hospitals should be sorted alphabetically and the first should be reported.
 
 
+Solution:
 
 best <- function(state, outcome){
   outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character", header=TRUE)
@@ -65,7 +68,19 @@ best <- function(state, outcome){
 }
 
 
+Explanation:
 
+The dataset is quite big, I tried dealing with the whole data in Rstudio but its messy when you do head,so I decided to just deal with the columns relevant for creating this 
+best function.
+
+> header = TRUE is added because our data has headers (Provider Number,	Hospital Name,	Address 1 ..) and we want R to start counting the data entries from row2.
+
+outcomes[1, ] will give
+
+            Provider.Number         Hospital.Name                            Address.1
+1           10001                   SOUTHEAST ALABAMA MEDICAL CENTER         1108 ROSS CLARK CIRCLE
+
+> 
 
 
 
