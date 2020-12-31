@@ -4,6 +4,7 @@ ________________________________________________________________________________
 1. Plot the 30-day mortality rates for heart attack
 _______________________________________________________________________________________________________________________________________________________________________________
 
+Solution:
 
 outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character")  
 outcome[, 11] <- as.numeric(outcome[, 11])
@@ -11,7 +12,7 @@ hist(outcome[, 11], xlab="Deaths", main="Mortality rate for heart attack", col="
 
 Explanation:
 
-colClasses ????
+> colClasses ????
 Two benefits from this:
 
 First: If you can see the difference below, loading a huge data with this argument significantly reduces time, because read.csv need not to make an educated guess about the 
@@ -58,6 +59,7 @@ the hospitals should be sorted alphabetically and the first should be reported.
 
 
 Solution:
+
 best <- function(state, outcome){
     
     file <- read.csv("outcome-of-care-measures.csv", header = TRUE, colClasses = "character")
@@ -73,22 +75,21 @@ best <- function(state, outcome){
         stop("Invalid outcome")
     }
     
-    data <- data[(data[, "state"] == state), ]
+    data <- data[(data[, "state"] == state), ]              ## we can check if we just got that state or not by unique(data["state"])
     data[, outcome] <- suppressWarnings(as.numeric(data[, outcome]))
     data <- data[!is.na(data[, outcome]), ]
     data <- data[order(data[, outcome]), ]
     names <- data[data[, outcome] == min(data[, outcome]),1]
-    sort(names)[1]
-    
-}  
-  
+    sort(names)[1]   
+ 
+    }  
 
 Explanation:
 
-The dataset is quite big, I tried dealing with the whole data in Rstudio but its messy and not much understandable at a glance when we do head,so I decided to just deal with the columns relevant for creating this 
+---->  The dataset is quite big, I tried dealing with the whole data in Rstudio but its messy and not much understandable at a glance when we do head,so I decided to just deal with the columns relevant for creating this 
 best function.
 
-> header = TRUE is added because our data has headers (Provider Number,	Hospital Name,	Address 1 ..) and we want R to start counting the data entries from row2.
+---->  header = TRUE is added because our data has headers (Provider Number,	Hospital Name,	Address 1 ..) and we want R to start counting the data entries from row2.
 
 outcomes[1, ] will give
 
@@ -97,34 +98,14 @@ outcomes[1, ] will give
 
 and not just this             Provider.Number         Hospital.Name                            Address.1
 
- >
- 
+----> read.csv checks the first few rows of your data to see whether to treat each variable as numeric. If it finds non-numeric values, it assumes the variable is character data, and character variables are converted to factors. Note that if a variable can't be converted to numeric then it will be converted to factor as default which makes it more difficult to convert to number. Therefore, it can be advisable just to read all variables in as 'character' colClasses = "character" and then convert the specific columns to numeric once the csv is read.
 
+----> Take care of this difference wherein you cannot convert a list directly into a numeric vector, you need to unlist it first.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> data["heart attack"] <- as.numeric(data["heart attack"])
+Error: (list) object cannot be coerced to type 'double'
+> data[, "heart attack"] <- as.numeric(data[, "heart attack"])
+Warning message:
+NAs introduced by coercion
 
 
