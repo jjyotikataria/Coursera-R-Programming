@@ -1,4 +1,3 @@
-
 best <- function(state, outcome){
     
     file <- read.csv("outcome-of-care-measures.csv", header = TRUE, colClasses = "character")
