@@ -1,33 +1,43 @@
-rankall <- function(outcome, num = "best"){
+rankall <- function(outcome, num = "best") {
     
-    file <- read.csv("outcome-of-care-measures.csv", header = TRUE, colClasses = "character")
     
-    data <- file[c(2,7,11,17,23)]
+    outcomes <- read.csv("outcome-of-care-measures.csv", colClasses = "character", header = TRUE)  ## Reading outcome data
     
-    if(!outcome %in% c("heart attack","heart failure","pneumonia")){
-        stop("Invalid outcome")
+    data <- file[c(2,7,11,17,23)]       ## Getting just the data we want
+    
+    colnames(data) <- c("hospital", "state", "heart attack", "heart failure", "pneumonia")
+    
+    if(!outcome %in% c("heart attack", "heart failure", "pneumonia")){
+        stop('invalid outcome')
     }
     
+    hRank <- data.frame()
     
-    empty_df <- data.frame()
-    
-    for(state in sort(unique(data[, "state"]))){                    
+    for(state in sort(unique(data[,"state"]))){
+      
+        hRates <- data[(data[, "state"] == state), ]              ## Get only the hospitals in this state
         
-        data <- data[(data[, "state"] == state), ]              
-        data[, outcome] <- as.numeric(data[, outcome])
-        data <- data[!is.na(data[, outcome]),]
+        hRates[, outcome] <- as.numeric(hRates[, outcome])        ## Convert outcome rate to numeric
         
-        if(num == "best"){
-            rnum <- 1
-        } else if (num == "worst"){
-            rnum <- nrow(data)
-            
+        hRates <- hRates[!is.na(hRates[, outcome]), ]             ## Removing NA
+  
+        if(num == "best") {                                       ## convert num argument to valid rank
+            rnum <- 1 
+        } else if (num == "worst") {
+            rnum <- nrow(hRates) 
         }
         else {rnum = num}
+       
+        hRates <- hRates[order(hRates[, outcome], hRates[, "hospital"]), ]          ## Order by outcome rate & hospital name
         
+        hName <- hRates[rnum,1]
         
-        
+        hRank <- rbind(hRank,
+                       data.frame(hospital = hName,
+                                  state = state))
     }
     
+    hRank                 ## Return the desired dataframe for the solution
+
     
 }
