@@ -8,7 +8,8 @@ rankall <- function(outcome, num = "best"){
         stop("Invalid outcome")
     }
     
-    
+                                      ## Getting names of unique state names : sort(unique(data[, "state"]))
+                                      ## Getting number of unique states : length(sort(unique(data[, "state"])))
     empty_df <- data.frame()
     
     
